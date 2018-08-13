@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<script src="js/angularjs.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/angular-upload.js"></script>
+<script src="js/angular-upload-shim.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/myscript.js?ver=1.1"></script>
+<script src="js/services.js?ver=1.1"></script>
+</head>
+<body>
+
+<div ng-app="myapp" ng-controller = "carController">
+	<div class="container">
+		<!--loader-->
+			<div class="row"><div class="overLaySidebar" ng-show='overlay' style="z-index:1;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: #000;opacity: 0.5;z-index: 101;"></div></div>
+			<div class="col-md-12"><img src="./img/rolling.gif" alt="loading.." style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index:9999999;" ng-show='loader'></div>
+		<!--loader-->
+		<h1>{{heading}}</h1>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="usr">Manufacturer Name:</label>
+					<input type="text" class="form-control"  ng-model ="man_name" placeholder="Add Manufacturer">
+					<div ng-show="man_name_req" style="color:red">* Manufacturer name is required.</div>
+					<button style="margin-top:2%;" type="button" class="btn btn-primary" ng-click = "insertManufacturer()">Submit</button>
+					<button style="margin-top:2%;" type="button" class="btn btn-primary" ng-click = "insertModelPage()">Go To Insert Model</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
