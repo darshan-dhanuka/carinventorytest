@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<script src="js/angularjs.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/angular-upload.js"></script>
+<script src="js/angular-upload-shim.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/myscript.js?ver=1.1"></script>
+<script src="js/services.js?ver=1.1"></script>
+</head>
+<body style="background-color: rgba(238, 238, 238, 0.63);">
+
+	<div ng-app="myapp" ng-controller = "carController">
+		<div class="container" style="margin-top: 15px;padding: 15px;    border: 1px solid #bbb;">
+			<!--loader-->
+			<div class="row"><div class="overLaySidebar" ng-show='overlay' style="z-index:1;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: #000;opacity: 0.5;z-index: 101;"></div></div>
+			<div class="col-md-12"><img src="./img/rolling.gif" alt="loading.." style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index:9999999;" ng-show='loader'></div>
+			<!--loader-->
+			<div class="col-md-12 text-center"><h1>{{model_heading}}</h1></div>
+			<button class="btn btn-primary mb-2" ng-click="first_page()">Go Back</button>
+			<div class="row" style="margin-top:2%;">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="usr">Model Name:</label>
+						<input type="text" class="form-control"  ng-model ="model_name" placeholder="Add Model">
+					</div>
+					<div class="col-md-12"><div ng-show="model_name_req" style="color:red">* Model name is required.</div></div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="usr">Select Manufacturer:</label>
+						<select ng-model="selectedModelName" class="form-control">
+							<option value="">Please Select Manufacturer Name</option>
+							<option ng-repeat="x in man_names" value="{{x.id}}">{{x.manufacture_name}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6" style="clear:both;">
+					<div class="form-group">
+						<label for="usr">Color of the Car:</label>
+						<input type="text" class="form-control"  ng-model ="color_name" placeholder="Put Color">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="usr">Manufacture Year of the Car:</label>
+						<input type="text" class="form-control"  ng-model ="man_year" placeholder="Manufacture Year">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="usr">Registration Number  of the Car:</label>
+						<input type="text" class="form-control"  ng-model ="reg_num" ng-disabled="isDisabled" placeholder="Registration Number">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="usr">Note:</label>
+						<input type="text" class="form-control"  ng-model ="note" placeholder="Additional Details">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="usr">Add Pictures:</label>
+						<button style="margin-top:2%;" class="btn btn-success" type="button" ngf-select="upload($file)">Upload</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="col-md-12 text-center">Note: Please check Registration Number of the car before uploading images</div>
+					<div class="col-md-12"><center><button style="margin-top:2%;" type="button" class="btn btn-primary" ng-click = "insertModel()">Submit</button><button style="margin-top:2%;margin-left: 1%" type="button" class="btn btn-primary" ng-click = "goToInventory()">Go To Inventory</button></center></div>
+				</div>		
+			</div>
+		</div>
+	</div>
+</body>
+</html>

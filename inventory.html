@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<script src="js/angularjs.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/angular-upload.js"></script>
+<script src="js/angular-upload-shim.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/myscript.js?ver=1.1"></script>
+<script src="js/services.js?ver=1.1"></script>
+</head>
+<body>
+
+<div ng-app="myapp" ng-controller = "inventoryController">
+	<div class="container">
+		<!--loader-->
+			<div class="row"><div class="overLaySidebar" ng-show='overlay' style="z-index:1;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: #000;opacity: 0.5;z-index: 101;"></div></div>
+			<div class="col-md-12"><img src="./img/rolling.gif" alt="loading.." style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index:9999999;" ng-show='loader'></div>
+		<!--loader-->
+        <h1>{{model_heading}}</h1>
+        <button class="btn btn-primary mb-2" ng-click="first_page()">Go Back</button>
+        <div class="row">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>Manufacture Name</th>
+                    <th>Model Name</th>
+                    <th>Count</th>
+                    <th>All Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="no_data == '1'" class="text-center"><td colspan='5'>NO DATA FOUND</td></tr>
+                    <tr  class="repeat-animation hide-fade" ng-show="no_data == '0'" ng-repeat="record in table_data | orderBy:sortType:sortReverse">
+                        <td>{{$index+1}}</td>
+                        <td>{{record.manufacture_name}}</a></td>
+                        <td>{{record.model_name}}</td>
+                        <td>{{record.cnt}}</td>
+                        <td><span ng-model="details_new" style="color:blue;cursor: pointer;" ng-click="get_details(record)">Get Details</a></td>
+                    </tr>    
+                </tbody>
+            </table>
+        </div>
+        <div style="position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow: hidden;-webkit-overflow-scrolling: touch;outline: 0;" ng-show="showModal"  close="cancel()">
+            <div class="modal-dialog" style="width:80%;">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="modal_close()">X</button>
+                    <h4 class="modal-title">Model Details</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th>Sr No</th>
+                            <th>Manufacture Name</th>
+                            <th>Model Name</th>
+                            <th>Color</th>
+                            <th>Manufacture Year</th>
+                            <th>Registration Number</th>
+                            <th>Additional Details</th>
+                            <th>Download Image(s)</th>
+                            <th>Sold</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="details_no_data == '1'" class="text-center"><td colspan='8'>NO DATA FOUND</td></tr>
+                            <tr  class="repeat-animation hide-fade" ng-show="details_no_data == '0'" ng-repeat="record in details_table_data | orderBy:sortType:sortReverse">
+                                <td>{{$index+1}}</td>
+                                <td>{{record.manufacture_name}}</a></td>
+                                <td>{{record.model_name}}</td>
+                                <td>{{record.color}}</td>
+                                <td>{{record.manufacture_year}}</td>
+                                <td>{{record.registration_number}}</td>
+                                <td>{{record.add_details}}</td>
+                                <td><span ng-model="dwn_img" style="color:blue;cursor: pointer;" ng-click="dwn_img(record)">Download</a></td>
+                                <td><span ng-model="sold" style="color:blue;cursor: pointer;" ng-click="sold(record)">Sold</a></td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>
+                <!--<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">No</button>
+                    <button type="button" class="btn btn-primary" ng-click="ok()">Yes</button>
+                </div>-->
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+</body>
+</html>
