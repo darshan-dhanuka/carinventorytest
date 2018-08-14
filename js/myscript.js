@@ -14,7 +14,12 @@ app.controller("carController",function($scope,APIServices,$http,Upload,$window)
     $scope.model_heading = "Welcome to your model details";
 	$scope.man_name = "";
 	$scope.reg_num = "";
+	$scope.model_name = "";
+	$scope.selectedModelName ="";
+	$scope.color_name="";
+	$scope.man_year ="";
 	$scope.man_names = [];
+	$scope.image_upload = 0;
 	$scope.insertModelPage = function(){
 		$window.location.href = '/model_details.html'
 	}
@@ -59,6 +64,7 @@ app.controller("carController",function($scope,APIServices,$http,Upload,$window)
 			data: {file: file,model_id:$scope.reg_num,task:"upload_file"}
 		}).then(function (resp) {
 			$scope.toggleLoader(2);
+			$scope.image_upload = 1;
 			$scope.isDisabled = true;
 			if(resp.data.errorCode == '0'){
 				alert(resp.data.msg);
@@ -99,6 +105,10 @@ app.controller("carController",function($scope,APIServices,$http,Upload,$window)
 		}
 		if($scope.reg_num == ''){
 			alert('Please put registration number');
+			return false;
+		}
+		if($scope.image_upload == 0){
+			alert('Please upload atleast one image');
 			return false;
 		}
 		$scope.toggleLoader(1);

@@ -165,7 +165,7 @@ class Database {
 			while($row = mysqli_fetch_array($con_fetch_qry,MYSQLI_ASSOC)){
 				$img_array[] = $row['img_path'];
 			}
-			$tmpFile = tempnam('/tmp', '');
+			$tmpFile = tempnam('../images', '');
 			$zip = new ZipArchive;
 			$zip->open($tmpFile, ZipArchive::CREATE);
 			foreach ($img_array as $img) {
